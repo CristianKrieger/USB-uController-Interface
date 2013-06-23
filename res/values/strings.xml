@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USB-uController Interface</string>
+    
+    <string name="action_settings">Settings</string>
+    <string name="action_save">Save Session</string>
+    
+    <string name="frag_terminal_title">Communication Terminal</string>
+    <string name="frag_terminal_send">Send</string>
+    <string name="frag_terminal_hint">Enter a command</string>
+    
+    <string name="frag_controllers_title">Controllers</string>
+    <string name="frag_controllers_devices">Available devices:</string>
+    <string name="frag_controllers_actions">Actions for current device:</string>
+    <string name="frag_controllers_details">Device details</string>
+    <string name="frag_controllers_ping">Ping device</string>
+    <string name="frag_controllers_start">Start communication</string>
+    <string name="frag_controllers_stop">Stop communication</string>
+    <string name="frag_controllers_file">Send text file</string>
+</resources>

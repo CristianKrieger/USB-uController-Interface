@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <TextView style="@style/Text_FragmentTitle"
+        android:text="@string/frag_terminal_title"/>
+    <LinearLayout android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="#300924"
+	    android:orientation="vertical"
+	    android:padding="5dp">
+	    <LinearLayout android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        <EditText android:layout_height="wrap_content"
+	            android:layout_width="0dp"
+	            android:layout_gravity="center"
+	            android:imeOptions="actionSend"
+	            android:id="@+id/frag_terminal_edittext_input"
+	            android:inputType="text"
+	            android:hint="@string/frag_terminal_hint"
+	            android:maxLength="50"
+	            android:singleLine="true"
+	            android:layout_weight="0.8"/>
+	        <Button android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:layout_width="0dp"
+	            android:id="@+id/frag_terminal_button_send"
+	            android:layout_weight="0.2"
+	            android:text="@string/frag_terminal_send"/>
+	    </LinearLayout>
+	    <ScrollView android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:id="@+id/frag_terminal_scroll_terminal">
+	        <TextView android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:padding="5dp"
+		        android:textColor="#fff"
+		        android:textSize="16sp"
+		        android:id="@+id/frag_terminal_txt_terminal"
+		        android:inputType="textMultiLine"/>
+	    </ScrollView>
+	</LinearLayout>
+</LinearLayout>
