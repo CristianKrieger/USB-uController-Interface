@@ -16,6 +16,7 @@
 		        <ImageView android:layout_width="wrap_content"
 		            android:layout_height="fill_parent"
 		            android:adjustViewBounds="true"
+		            android:id="@+id/frag_controllers_img_refresh"
 		            android:clickable="true"
 			        android:layout_centerVertical="true"
 		            android:layout_toLeftOf="@+id/frag_controllers_img_toggle"

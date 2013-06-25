@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme" >
         <activity
-            android:name="com.kriegersoftware.demos.usbinterface.ui.HomeActivity"
+            android:name="com.kriegersoftware.demos.usbinterface.activity.HomeActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateUnchanged">
             <intent-filter>

@@ -31,11 +31,11 @@ public class TerminalFragment extends Fragment{
 	private EditText et_input;
 	private ScrollView scroll_terminal;
 	
-	private final static int ORIGIN_APP    = 0;
-	private final static int ORIGIN_ERROR  = 1;
-	private final static int ORIGIN_DEVICE = 2;
-	private final static int ORIGIN_USER   = 3;
-	private final static int ORIGIN_HELP   = 4;
+	public final static int ORIGIN_APP    = 0;
+	public final static int ORIGIN_ERROR  = 1;
+	public final static int ORIGIN_DEVICE = 2;
+	public final static int ORIGIN_USER   = 3;
+	public final static int ORIGIN_HELP   = 4;
 	
 	private final static String[] ORIGIN_TITLE_PREFIX = {
 		"System",
@@ -56,7 +56,6 @@ public class TerminalFragment extends Fragment{
 	private final static String PROMPT_INDICATOR = ":~$";
 	private final static String WELCOME_MSG = "Welcome! The USB interface is now online.";
 	private final static String HINT_MSG = "Type 'help' for useful commands.";
-	private final static String NO_DEVICES  = "No devices are connected.";
 	private final static String EMPTY_MSG   = "Message is empty!";
 	private final static String HELP_MSG    = "You can use 'clear' to remove all"
 											+" content from the screen.\n"
@@ -78,18 +77,17 @@ public class TerminalFragment extends Fragment{
 		
 		addTextToTerminal(formatTerminalText(null, ORIGIN_APP, WELCOME_MSG));
 		addTextToTerminal(formatTerminalText(null, ORIGIN_APP, HINT_MSG));
-		addTextToTerminal(formatTerminalText(null, ORIGIN_APP, NO_DEVICES));
 		return view;
 	}
 	
-	private void addTextToTerminal(SpannedString input){
+	public void addTextToTerminal(SpannedString input){
 		txt_terminal.append(input);
 		txt_terminal.append("\n");
 		scroll_terminal.post(new Scroller(scroll_terminal,txt_terminal));
 		//scroll_terminal.fullScroll(View.FOCUS_DOWN);
 	}
 	
-	private SpannedString formatTerminalText(String origin, int originId,
+	public SpannedString formatTerminalText(String origin, int originId,
 			String text){
 		String result;
 		result = ORIGIN_TITLE_PREFIX[originId];

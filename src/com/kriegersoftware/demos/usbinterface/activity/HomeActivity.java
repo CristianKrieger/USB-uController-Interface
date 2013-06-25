@@ -1,4 +1,4 @@
-package com.kriegersoftware.demos.usbinterface.ui;
+package com.kriegersoftware.demos.usbinterface.activity;
 
 import com.kriegersoftware.demos.usbinterface.R;
 
