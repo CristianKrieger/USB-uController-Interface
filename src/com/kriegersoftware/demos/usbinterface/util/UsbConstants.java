@@ -1,6 +1,8 @@
 package com.kriegersoftware.demos.usbinterface.util;
 
-public class UsbConstants {
+import android.hardware.usb.UsbConstants;
+
+public class USBConstants {
 
 	private final static int USB_CLASS_PER_INTERFACE 		= 0x00;
 	private final static int USB_CLASS_AUDIO 				= 0x01;
@@ -84,7 +86,14 @@ public class UsbConstants {
 	}
 
 	public static String resolveUsbEndpointDirection(int usbEndpointDirection){
-
+//		if (usbEndpointDirection == UsbConstants.USB_ENDPOINT_XFER_BULK) {
+//            if (usbEndpointDirection == UsbConstants.USB_DIR_IN)
+//                return "Input";
+//            else
+//            	return "Output";
+//        }else{
+//        	return "Unknown";
+//        }
 		switch(usbEndpointDirection){
 		case USB_DIR_OUT:
 			return "Outbound (0x"+Integer.toHexString(usbEndpointDirection) + ")";		
@@ -105,7 +114,7 @@ public class UsbConstants {
 		case USB_ENDPOINT_XFER_BULK:
 			return "Bulk (0x"+Integer.toHexString(usbEndpointType) + ")";
 		case USB_ENDPOINT_XFER_INT:
-			return "Intrrupt (0x"+Integer.toHexString(usbEndpointType) + ")";				
+			return "Interrupt (0x"+Integer.toHexString(usbEndpointType) + ")";				
 		default:
 			return "Unknown (0x"+Integer.toHexString(usbEndpointType) + ")";
 		}

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.kriegersoftware.demos.usbinterface.R;
+import com.kriegersoftware.demos.usbinterface.activity.HomeActivity;
 
 public class TerminalFragment extends Fragment{
 
@@ -30,6 +31,7 @@ public class TerminalFragment extends Fragment{
 	private Button btn_send;
 	private EditText et_input;
 	private ScrollView scroll_terminal;
+	private ControllersFragment controllers;
 	
 	public final static int ORIGIN_APP    = 0;
 	public final static int ORIGIN_ERROR  = 1;
@@ -75,19 +77,36 @@ public class TerminalFragment extends Fragment{
 		btn_send.setOnClickListener(new SendButtonListener());
 		et_input.setOnEditorActionListener(new EditTextEnterListener());
 		
-		addTextToTerminal(formatTerminalText(null, ORIGIN_APP, WELCOME_MSG));
-		addTextToTerminal(formatTerminalText(null, ORIGIN_APP, HINT_MSG));
+		addTextToTerminal(null, ORIGIN_APP, WELCOME_MSG);
+		addTextToTerminal(null, ORIGIN_APP, HINT_MSG);
+		
+		controllers = (ControllersFragment) getActivity()
+				.getFragmentManager().findFragmentById(R.id.home_fragment_controllers);
 		return view;
 	}
 	
-	public void addTextToTerminal(SpannedString input){
+	public void addThreadSafeTextToTerminal(String origin, int originId,
+			String text){
+		final SpannedString input=formatTerminalText(origin, originId, text);
+		txt_terminal.post(new Runnable() {
+            public void run() {
+            	txt_terminal.append(input);
+        		txt_terminal.append("\n");
+            }
+        });
+		scroll_terminal.post(new Scroller(scroll_terminal,txt_terminal));
+	}
+	
+	public void addTextToTerminal(String origin, int originId,
+			String text){
+		SpannedString input=formatTerminalText(origin, originId, text);
 		txt_terminal.append(input);
 		txt_terminal.append("\n");
 		scroll_terminal.post(new Scroller(scroll_terminal,txt_terminal));
 		//scroll_terminal.fullScroll(View.FOCUS_DOWN);
 	}
 	
-	public SpannedString formatTerminalText(String origin, int originId,
+	private SpannedString formatTerminalText(String origin, int originId,
 			String text){
 		String result;
 		result = ORIGIN_TITLE_PREFIX[originId];
@@ -108,11 +127,13 @@ public class TerminalFragment extends Fragment{
 	
 	private void sendInputToDevice(String input){
 		if(input.equals("help"))
-			addTextToTerminal(formatTerminalText(null, ORIGIN_HELP, HELP_MSG));
+			addTextToTerminal(null, ORIGIN_HELP, HELP_MSG);
 		else if(input.equals("clear"))
 			txt_terminal.setText("");
-		else
-			addTextToTerminal(formatTerminalText("PIC18F4550", ORIGIN_DEVICE, "Echo: "+input));
+		else if (controllers.deviceHasBeenSelected()){
+			addTextToTerminal(null, ORIGIN_USER, input);
+			((HomeActivity) getActivity()).sendMessageToDevice(input);
+		}
 	}
 	
 	private class EditTextEnterListener implements OnEditorActionListener{
@@ -132,11 +153,9 @@ public class TerminalFragment extends Fragment{
 			String input=et_input.getText().toString();
 			et_input.setText("");
 			if(input.equals(""))
-				addTextToTerminal(formatTerminalText(null, ORIGIN_ERROR, EMPTY_MSG));
-			else{
-				addTextToTerminal(formatTerminalText(null, ORIGIN_USER, input));
+				addTextToTerminal(null, ORIGIN_ERROR, EMPTY_MSG);
+			else
 				sendInputToDevice(input);
-			}
 		}
 	}
 	
